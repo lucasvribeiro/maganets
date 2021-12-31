@@ -12,6 +12,10 @@ const Home = () => {
   const [products, setProducts] = useState();
   const [wishList, setWishList] = useState([]);
 
+  const [visibleProducts, setVisibleProducts] = useState([]);
+
+  const [searchValue, setSearchValue] = useState("");
+
   const addToWishList = (product) => {
     setWishList(wishList.concat(product));
   };
@@ -24,9 +28,27 @@ const Home = () => {
     return wishList.includes(product);
   };
 
+  const onSearchValueChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const filterProducts = () => {
+    console.log(searchValue);
+    setVisibleProducts(
+      products.filter((p) =>
+        p.title.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    );
+  };
+
   useEffect(() => {
-    console.log(wishList);
-  }, [wishList]);
+    if (products) setVisibleProducts(products);
+  }, [products]);
+
+  useEffect(() => {
+    filterProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
 
   useEffect(() => {
     getProducts()
@@ -61,14 +83,18 @@ const Home = () => {
             </span>
           </div>
           <div className="header-search-container">
-            <SearchBox placeholder="Buscar produto" />
+            <SearchBox
+              placeholder="Buscar produto"
+              value={searchValue}
+              onChange={onSearchValueChange}
+            />
           </div>
         </div>
       </Header>
 
       <div className="home-products-container">
-        {products &&
-          products.map((product) => (
+        {visibleProducts &&
+          visibleProducts.map((product) => (
             <Product
               key={product.id}
               product={product}
