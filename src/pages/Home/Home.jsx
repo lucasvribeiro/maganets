@@ -7,6 +7,7 @@ import Product from "../../components/Product/Product";
 import SearchBox from "../../components/SearchBox/SearchBox";
 
 import "./Home.css";
+import ListContainer from "../../components/ListContainer/ListContainer";
 
 const Home = () => {
   const [products, setProducts] = useState();
@@ -61,7 +62,7 @@ const Home = () => {
   return (
     <div>
       <Header>
-        <div className="header-lef-container">
+        <div className="header-left-container">
           <h2>MagaNets</h2>
         </div>
         <div className="header-right-container">
@@ -91,7 +92,7 @@ const Home = () => {
 
       <div className="path-container">Home</div>
 
-      <div className="home-products-container">
+      <ListContainer>
         {visibleProducts &&
           visibleProducts.map((product) => (
             <Product
@@ -104,7 +105,7 @@ const Home = () => {
               onRemoveFromWishList={() => removeFromWishList(product)}
             />
           ))}
-      </div>
+      </ListContainer>
     </div>
   );
 };

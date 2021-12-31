@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const StyledHeader = styled.div`
   height: fit-content;
-  min-height: 25vh;
   width: 100vw;
   background: #5a2d82;
   border-top: 10px solid #370f53;
@@ -12,18 +11,24 @@ const StyledHeader = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+
+  @media only screen and (max-width: 1024px) {
+    padding: 30px 30px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
-const Header = ({ children, className }) => {
-  return <StyledHeader className={className}>{children}</StyledHeader>;
+const Header = ({ children }) => {
+  return <StyledHeader>{children}</StyledHeader>;
 };
 
 Header.propTypes = {
-  className: PropTypes.string,
+  children: PropTypes.any,
 };
 
-Header.deafultProps = {
-  className: PropTypes.string,
-};
+Header.deafultProps = {};
 
 export default Header;
