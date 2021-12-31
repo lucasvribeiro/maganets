@@ -27,15 +27,15 @@ const StyledSearchBox = styled.div`
   }
 `;
 
-const SearchBox = ({ children, placeholder, value, disabled, onChange }) => {
+const SearchBox = ({ placeholder, value, disabled, onChange }) => {
   return (
     <StyledSearchBox>
       <input
         type="text"
-        placeholder={placeholder}
         value={value}
         onChange={onChange}
         disabled={disabled}
+        placeholder={placeholder}
       />
 
       <i className="fas fa-search" />
@@ -44,11 +44,15 @@ const SearchBox = ({ children, placeholder, value, disabled, onChange }) => {
 };
 
 SearchBox.propTypes = {
-  className: PropTypes.string,
+  placeholder: PropTypes.any,
+  value: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 SearchBox.deafultProps = {
-  className: PropTypes.string,
+  placeholder: "Busca...",
+  disabled: false,
 };
 
 export default SearchBox;
