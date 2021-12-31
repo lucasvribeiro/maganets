@@ -1,0 +1,27 @@
+.header-lef-container {
+  width: 30%;
+}
+
+.header-right-container {
+  width: 70%;
+}
+
+.header-links-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header-link i {
+  margin-right: 4px;
+}
+
+.home-products-container {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 32px 48px;
+  width: fit-content;
+  padding: 80px;
+  box-sizing: border-box;
+
+}
