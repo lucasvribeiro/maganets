@@ -8,6 +8,8 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 
 import "./Home.css";
 import ListContainer from "../../components/ListContainer/ListContainer";
+import Badge from "../../components/Badge/Badge";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState();
@@ -67,18 +69,24 @@ const Home = () => {
         </div>
         <div className="header-right-container">
           <div className="header-links-container">
-            <span className="header-link">
-              <i className="fas fa-map-marker-alt" /> Cidade: São Paulo
-            </span>
+            <Link to="/">
+              <span className="header-link">
+                <i className="fas fa-map-marker-alt" /> Cidade: São Paulo
+              </span>
+            </Link>
 
-            <span className="header-link">
-              <i className="fas fa-phone" /> Central de Atendimento
-            </span>
+            <Link to="/support">
+              <span className="header-link">
+                <i className="fas fa-phone" /> Central de Atendimento
+              </span>
+            </Link>
 
-            <span className="header-link">
-              <i className="fas fa-heart" /> Lista de Desejos ({wishList.length}
-              )
-            </span>
+            <Link to="/wish-list" state={{ wishList }}>
+              <span className="header-link">
+                <i className="fas fa-heart" /> Lista de Desejos
+                <Badge>{wishList.length}</Badge>
+              </span>
+            </Link>
           </div>
           <div className="header-search-container">
             <SearchBox

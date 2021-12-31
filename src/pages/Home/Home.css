@@ -10,6 +10,18 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  height: fit-content;
+}
+
+.header-link {
+  padding: 8px 16px;
+  border-radius: 16px;
+
+  transition: all 0.3s ease;
+}
+
+.header-link:hover {
+  background-color: #370f53;
 }
 
 .header-link i {
@@ -43,7 +55,7 @@
   }
 
   .header-link {
-    text-align: center;
+    padding: 0;
   }
 }
 
