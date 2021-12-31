@@ -6,23 +6,32 @@ const StyledSearchBox = styled.div`
     position: relative;
     left: 16px;
     top: -34px;
-
     color: #999999;
+    transition: all 0.3s ease;
   }
 
   input {
     width: 100%;
     height: 48px;
-    border-radius: 4px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #cfcfcf;
     padding: 0 40px;
+    border-radius: 4px;
+    border: 1px solid #cfcfcf;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.35);
+    transition: all 0.3s ease;
 
     &:focus {
-      border: 1px solid #370f53;
       outline: none;
+      box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.7);
+      color: #666666;
+
+      + i {
+        color: #5a2d82;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.7);
     }
   }
 `;

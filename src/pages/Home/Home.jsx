@@ -11,9 +11,7 @@ import "./Home.css";
 const Home = () => {
   const [products, setProducts] = useState();
   const [wishList, setWishList] = useState([]);
-
   const [visibleProducts, setVisibleProducts] = useState([]);
-
   const [searchValue, setSearchValue] = useState("");
 
   const addToWishList = (product) => {
@@ -33,7 +31,6 @@ const Home = () => {
   };
 
   const filterProducts = () => {
-    console.log(searchValue);
     setVisibleProducts(
       products.filter((p) =>
         p.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -46,7 +43,7 @@ const Home = () => {
   }, [products]);
 
   useEffect(() => {
-    filterProducts();
+    if (products) filterProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
@@ -92,11 +89,13 @@ const Home = () => {
         </div>
       </Header>
 
+      <div className="path-container">Home</div>
+
       <div className="home-products-container">
         {visibleProducts &&
           visibleProducts.map((product) => (
             <Product
-              key={product.id}
+              key={product.sku}
               product={product}
               showWishListMarker={true}
               showRemoveWishListButton={false}

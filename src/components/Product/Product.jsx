@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const StyledProduct = styled.div`
   padding: 12px;
   width: 200px;
-  height: 260px;
+  height: 280px;
   position: relative;
 
   text-align: center;
@@ -17,6 +17,12 @@ const StyledProduct = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.18);
+  }
 
   .product-image {
     max-width: 120px;
@@ -43,11 +49,18 @@ const StyledProduct = styled.div`
     > .wl-heart {
       color: #ff1919;
     }
+
+    > .wl-bookmark {
+      filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
+    }
   }
 
   .wl-bookmark {
     font-size: 40px;
     color: #222222;
+
+    filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.1));
+    transition: all 0.2s ease;
   }
 
   .wl-heart {
@@ -58,7 +71,7 @@ const StyledProduct = styled.div`
     top: 8px;
     left: 6px;
 
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   .remove-button {
@@ -72,7 +85,6 @@ const StyledProduct = styled.div`
 `;
 
 const Product = ({
-  key,
   product,
   isOnWishList,
   showWishListMarker,
@@ -81,7 +93,7 @@ const Product = ({
   onRemoveFromWishList,
 }) => {
   return (
-    <StyledProduct key={key} isOnWishList={isOnWishList}>
+    <StyledProduct isOnWishList={isOnWishList}>
       {showWishListMarker && (
         <div
           className="wish-list-marker"
@@ -109,9 +121,8 @@ const Product = ({
 };
 
 Product.propTypes = {
-  key: PropTypes.any,
-  product: PropTypes.object,
-  isOnWishList: PropTypes.bool,
+  product: PropTypes.object.isRequired,
+  isOnWishList: PropTypes.bool.isRequired,
   showWishListMarker: PropTypes.bool,
   showRemoveWishListButton: PropTypes.bool,
   onAddToWishList: PropTypes.func,
@@ -119,6 +130,7 @@ Product.propTypes = {
 };
 
 Product.deafultProps = {
+  isOnWishList: false,
   showWishListMarker: true,
   showRemoveWishListButton: false,
 };
