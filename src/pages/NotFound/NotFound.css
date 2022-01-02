@@ -1,0 +1,15 @@
+.not-found {
+  width: 100vw;
+  height: calc(100vh - 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #5a2d82;
+  border-top: 10px solid #370f53;
+}
+
+.not-found i {
+  font-size: 42px;
+}
