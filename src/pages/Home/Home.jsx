@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import { getProducts } from "../../services/api";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addToWishList, removeFromWishList } from "../../actions/index";
 
 import Header from "../../components/Header/Header";
 import Product from "../../components/Product/Product";
 import SearchBox from "../../components/SearchBox/SearchBox";
+import Badge from "../../components/Badge/Badge";
+import ListContainer from "../../components/ListContainer/ListContainer";
+
+import { getProducts } from "../../services/api";
 
 import "./Home.css";
-import ListContainer from "../../components/ListContainer/ListContainer";
-import Badge from "../../components/Badge/Badge";
-import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
+  const { wishList, addToWishList, removeFromWishList } = props;
+
   const [products, setProducts] = useState();
-  const [wishList, setWishList] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  const addToWishList = (product) => {
-    setWishList(wishList.concat(product));
-  };
-
-  const removeFromWishList = (product) => {
-    setWishList(wishList.filter((p) => p.id !== product.id));
-  };
-
   const checkIsOnWishList = (product) => {
-    return wishList.includes(product);
+    return wishList.filter((p) => p.id === product.id).length ? true : false;
   };
 
   const onSearchValueChange = (e) => {
@@ -47,6 +44,7 @@ const Home = () => {
 
   useEffect(() => {
     if (products) filterProducts();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
@@ -60,6 +58,10 @@ const Home = () => {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(wishList);
+  }, [wishList]);
 
   return (
     <div>
@@ -81,7 +83,7 @@ const Home = () => {
               </span>
             </Link>
 
-            <Link to="/wish-list" state={{ wishList }}>
+            <Link to="/wish-list">
               <span className="header-link">
                 <i className="fas fa-heart" /> Lista de Desejos
                 <Badge>{wishList.length}</Badge>
@@ -118,4 +120,11 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (store) => ({
+  wishList: store.wishListState.wishList,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ addToWishList, removeFromWishList }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

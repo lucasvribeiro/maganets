@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { removeFromWishList } from "../../actions/index";
+
 import Badge from "../../components/Badge/Badge";
 import Header from "../../components/Header/Header";
 import ListContainer from "../../components/ListContainer/ListContainer";
 import Product from "../../components/Product/Product";
 import SearchBox from "../../components/SearchBox/SearchBox";
 
-const WishList = () => {
-  const location = useLocation();
-  const [wishList, setWishList] = useState(location.state.wishList);
+const WishList = (props) => {
+  const { wishList, removeFromWishList } = props;
 
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const onSearchValueChange = (e) => {
     setSearchValue(e.target.value);
-  };
-
-  const addToWishList = (product) => {
-    setWishList(wishList.concat(product));
-  };
-
-  const removeFromWishList = (product) => {
-    setWishList(wishList.filter((p) => p.id !== product.id));
   };
 
   const checkIsOnWishList = (product) => {
@@ -66,7 +62,7 @@ const WishList = () => {
               </span>
             </Link>
 
-            <Link to="/wish-list" state={{ wishList }}>
+            <Link to="/wish-list">
               <span className="header-link">
                 <i className="fas fa-heart" /> Lista de Desejos
                 <Badge>{wishList.length}</Badge>
@@ -94,7 +90,6 @@ const WishList = () => {
               showWishListMarker={false}
               showRemoveWishListButton={true}
               isOnWishList={checkIsOnWishList(product)}
-              onAddToWishList={() => addToWishList(product)}
               onRemoveFromWishList={() => removeFromWishList(product)}
             />
           ))}
@@ -103,4 +98,11 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+const mapStateToProps = (store) => ({
+  wishList: store.wishListState.wishList,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ removeFromWishList }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WishList);
