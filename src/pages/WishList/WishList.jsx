@@ -5,11 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { refreshProducts } from "../../actions/index";
 
-import Badge from "../../components/Badge/Badge";
 import Header from "../../components/Header/Header";
 import ListContainer from "../../components/ListContainer/ListContainer";
 import Product from "../../components/Product/Product";
-import SearchBox from "../../components/SearchBox/SearchBox";
 import Empty from "../../components/Empty/Empty";
 
 const WishList = (props) => {
@@ -23,36 +21,7 @@ const WishList = (props) => {
 
   return (
     <>
-      <Header>
-        <div className="header-left-container">
-          <h1 className="logo">MagaNets</h1>
-        </div>
-        <div className="header-right-container">
-          <div className="header-links-container">
-            <Link to="/">
-              <span className="header-link">
-                <i className="fas fa-map-marker-alt" /> Cidade: São Paulo
-              </span>
-            </Link>
-
-            <Link to="/support">
-              <span className="header-link">
-                <i className="fas fa-phone" /> Central de Atendimento
-              </span>
-            </Link>
-
-            <Link to="/wish-list">
-              <span className="header-link">
-                <i className="fas fa-heart" /> Lista de Desejos
-                <Badge>{wishList.length}</Badge>
-              </span>
-            </Link>
-          </div>
-          <div className="header-search-container">
-            <SearchBox />
-          </div>
-        </div>
-      </Header>
+      <Header />
 
       <div className="path-container">
         <Link to="/">Home</Link>
