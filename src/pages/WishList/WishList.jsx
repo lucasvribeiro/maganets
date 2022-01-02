@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { refreshProducts } from "../../actions/index";
 
 import Badge from "../../components/Badge/Badge";
 import Header from "../../components/Header/Header";
@@ -10,25 +13,12 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import Empty from "../../components/Empty/Empty";
 
 const WishList = (props) => {
-  const { wishList, searchValue } = props;
-
-  const [visibleProducts, setVisibleProducts] = useState([]);
-
-  const filterProducts = () => {
-    setVisibleProducts(
-      wishList.filter((p) =>
-        p.title.toLowerCase().includes(searchValue.toLowerCase())
-      )
-    );
-  };
+  const { wishList, filteredProducts, refreshProducts, searchValue } = props;
 
   useEffect(() => {
-    if (wishList) filterProducts();
+    refreshProducts(wishList, searchValue);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
-
-  useEffect(() => {
-    if (wishList) setVisibleProducts(wishList);
   }, [wishList]);
 
   return (
@@ -67,8 +57,8 @@ const WishList = (props) => {
       <div className="path-container">Home</div>
 
       <ListContainer>
-        {visibleProducts && visibleProducts.length ? (
-          visibleProducts.map((product) => (
+        {filteredProducts && filteredProducts.length ? (
+          filteredProducts.map((product) => (
             <Product
               key={product.sku}
               product={product}
@@ -86,7 +76,11 @@ const WishList = (props) => {
 
 const mapStateToProps = (store) => ({
   wishList: store.wishListState.wishList,
+  filteredProducts: store.productsState.filteredProducts,
   searchValue: store.searchValueState.searchValue,
 });
 
-export default connect(mapStateToProps)(WishList);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ refreshProducts }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WishList);

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { initializeProducts } from "../../actions/index";
 
 import { getProducts } from "../../services/api";
 
@@ -15,41 +18,22 @@ import Empty from "../../components/Empty/Empty";
 import "./Home.css";
 
 const Home = (props) => {
-  const { wishList, searchValue } = props;
+  const { wishList, filteredProducts, initializeProducts } = props;
 
-  const [products, setProducts] = useState();
   const [loading, setLoading] = useState(true);
-
-  const [visibleProducts, setVisibleProducts] = useState([]);
-
-  const filterProducts = () => {
-    setVisibleProducts(
-      products.filter((p) =>
-        p.title.toLowerCase().includes(searchValue.toLowerCase())
-      )
-    );
-  };
-
-  useEffect(() => {
-    if (products) setVisibleProducts(products);
-  }, [products]);
-
-  useEffect(() => {
-    if (products) filterProducts();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
 
   useEffect(() => {
     getProducts()
       .then((res) => {
         setLoading(false);
-        setProducts(res.data.products);
+        initializeProducts(res.data.products);
       })
       .catch((error) => {
         setLoading(false);
         console.log(error);
       });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -89,8 +73,8 @@ const Home = (props) => {
         <div className="path-container">Home</div>
 
         <ListContainer>
-          {visibleProducts && visibleProducts.length ? (
-            visibleProducts.map((product) => (
+          {filteredProducts && filteredProducts.length ? (
+            filteredProducts.map((product) => (
               <Product
                 key={product.sku}
                 product={product}
@@ -109,7 +93,10 @@ const Home = (props) => {
 
 const mapStateToProps = (store) => ({
   wishList: store.wishListState.wishList,
-  searchValue: store.searchValueState.searchValue,
+  filteredProducts: store.productsState.filteredProducts,
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ initializeProducts }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

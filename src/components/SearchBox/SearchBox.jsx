@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeSearchValue } from "../../actions/index";
+import { changeSearchValue, filterProducts } from "../../actions/index";
 
 const StyledSearchBox = styled.div`
   i {
@@ -47,9 +47,11 @@ const SearchBox = ({
   disabled,
   searchValue,
   changeSearchValue,
+  filterProducts,
 }) => {
   const handleSearchValueChanged = (e) => {
     changeSearchValue(e.target.value);
+    filterProducts(e.target.value);
   };
 
   useEffect(() => {
@@ -88,6 +90,6 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ changeSearchValue }, dispatch);
+  bindActionCreators({ changeSearchValue, filterProducts }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
