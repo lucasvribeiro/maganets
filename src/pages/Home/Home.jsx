@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addToWishList, removeFromWishList } from "../../actions/index";
+
+import { getProducts } from "../../services/api";
 
 import Header from "../../components/Header/Header";
 import Product from "../../components/Product/Product";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Badge from "../../components/Badge/Badge";
 import ListContainer from "../../components/ListContainer/ListContainer";
-
-import { getProducts } from "../../services/api";
+import Loader from "../../components/Loader/Loader";
+import Empty from "../../components/Empty/Empty";
 
 import "./Home.css";
-import Loader from "../../components/Loader/Loader";
 
 const Home = (props) => {
   const { wishList, addToWishList, removeFromWishList } = props;
@@ -108,7 +108,7 @@ const Home = (props) => {
         <div className="path-container">Home</div>
 
         <ListContainer>
-          {visibleProducts &&
+          {visibleProducts && visibleProducts.length ? (
             visibleProducts.map((product) => (
               <Product
                 key={product.sku}
@@ -119,7 +119,10 @@ const Home = (props) => {
                 onAddToWishList={() => addToWishList(product)}
                 onRemoveFromWishList={() => removeFromWishList(product)}
               />
-            ))}
+            ))
+          ) : (
+            <Empty />
+          )}
         </ListContainer>
       </Loader>
     </>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { removeFromWishList } from "../../actions/index";
@@ -10,6 +9,7 @@ import Header from "../../components/Header/Header";
 import ListContainer from "../../components/ListContainer/ListContainer";
 import Product from "../../components/Product/Product";
 import SearchBox from "../../components/SearchBox/SearchBox";
+import Empty from "../../components/Empty/Empty";
 
 const WishList = (props) => {
   const { wishList, removeFromWishList } = props;
@@ -82,7 +82,7 @@ const WishList = (props) => {
       <div className="path-container">Home</div>
 
       <ListContainer>
-        {visibleProducts &&
+        {visibleProducts && visibleProducts.length ? (
           visibleProducts.map((product) => (
             <Product
               key={product.sku}
@@ -92,7 +92,10 @@ const WishList = (props) => {
               isOnWishList={checkIsOnWishList(product)}
               onRemoveFromWishList={() => removeFromWishList(product)}
             />
-          ))}
+          ))
+        ) : (
+          <Empty />
+        )}
       </ListContainer>
     </>
   );
