@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { addToWishList, removeFromWishList } from "../../actions/index";
 
 import { getProducts } from "../../services/api";
 
@@ -24,10 +22,6 @@ const Home = (props) => {
 
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
-  const checkIsOnWishList = (product) => {
-    return wishList.filter((p) => p.id === product.id).length ? true : false;
-  };
 
   const onSearchValueChange = (e) => {
     setSearchValue(e.target.value);
@@ -62,10 +56,6 @@ const Home = (props) => {
         console.log(error);
       });
   }, []);
-
-  useEffect(() => {
-    console.log(wishList);
-  }, [wishList]);
 
   return (
     <>
@@ -115,7 +105,6 @@ const Home = (props) => {
                 product={product}
                 showWishListMarker={true}
                 showRemoveWishListButton={false}
-                isOnWishList={checkIsOnWishList(product)}
                 onAddToWishList={() => addToWishList(product)}
                 onRemoveFromWishList={() => removeFromWishList(product)}
               />
@@ -133,7 +122,4 @@ const mapStateToProps = (store) => ({
   wishList: store.wishListState.wishList,
 });
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addToWishList, removeFromWishList }, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

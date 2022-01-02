@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addToWishList, removeFromWishList } from "../../actions/index";
+
 const StyledProduct = styled.div`
   padding: 12px;
   width: 200px;
@@ -86,18 +90,27 @@ const StyledProduct = styled.div`
 
 const Product = ({
   product,
-  isOnWishList,
   showWishListMarker,
   showRemoveWishListButton,
-  onAddToWishList,
-  onRemoveFromWishList,
+
+  wishList,
+  addToWishList,
+  removeFromWishList,
 }) => {
+  const isOnWishList = (product) => {
+    return wishList.filter((p) => p.id === product.id).length ? true : false;
+  };
+
   return (
-    <StyledProduct isOnWishList={isOnWishList}>
+    <StyledProduct isOnWishList={isOnWishList(product)}>
       {showWishListMarker && (
         <div
           className="wish-list-marker"
-          onClick={isOnWishList ? onRemoveFromWishList : onAddToWishList}
+          onClick={
+            isOnWishList(product)
+              ? () => removeFromWishList(product)
+              : () => addToWishList(product)
+          }
         >
           <i className="wl-bookmark fas fa-bookmark" />
           <i className="wl-heart fas fa-heart" />
@@ -105,7 +118,10 @@ const Product = ({
       )}
 
       {showRemoveWishListButton && (
-        <div className="remove-button" onClick={onRemoveFromWishList}>
+        <div
+          className="remove-button"
+          onClick={() => removeFromWishList(product)}
+        >
           <i className="far fa-times-circle" />
         </div>
       )}
@@ -122,17 +138,20 @@ const Product = ({
 
 Product.propTypes = {
   product: PropTypes.object.isRequired,
-  isOnWishList: PropTypes.bool.isRequired,
   showWishListMarker: PropTypes.bool,
   showRemoveWishListButton: PropTypes.bool,
-  onAddToWishList: PropTypes.func,
-  onRemoveFromWishList: PropTypes.func,
 };
 
 Product.deafultProps = {
-  isOnWishList: false,
   showWishListMarker: true,
   showRemoveWishListButton: false,
 };
 
-export default Product;
+const mapStateToProps = (store) => ({
+  wishList: store.wishListState.wishList,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ addToWishList, removeFromWishList }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
