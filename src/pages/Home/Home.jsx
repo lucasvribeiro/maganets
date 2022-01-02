@@ -19,6 +19,7 @@ const Home = (props) => {
   const { wishList, addToWishList, removeFromWishList } = props;
 
   const [products, setProducts] = useState();
+ 
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 

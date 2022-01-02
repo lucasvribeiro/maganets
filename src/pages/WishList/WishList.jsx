@@ -17,12 +17,12 @@ const WishList = (props) => {
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  const onSearchValueChange = (e) => {
-    setSearchValue(e.target.value);
+  const checkIsOnWishList = (product) => {
+    return wishList.filter((p) => p.id === product.id).length ? true : false;
   };
 
-  const checkIsOnWishList = (product) => {
-    return wishList.includes(product);
+  const onSearchValueChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const filterProducts = () => {
