@@ -4,10 +4,15 @@ import PropTypes from "prop-types";
 const StyledPath = styled.div`
   padding: 30px 50px;
 
-  & a {
+  a {
     color: #222222;
     font-weight: bold;
     margin: 0 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #5a2d82;
+    }
   }
 `;
 
