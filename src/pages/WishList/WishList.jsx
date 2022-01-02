@@ -10,14 +10,9 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import Empty from "../../components/Empty/Empty";
 
 const WishList = (props) => {
-  const { wishList, removeFromWishList } = props;
+  const { wishList, searchValue } = props;
 
   const [visibleProducts, setVisibleProducts] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-
-  const onSearchValueChange = (e) => {
-    setSearchValue(e.target.value);
-  };
 
   const filterProducts = () => {
     setVisibleProducts(
@@ -64,11 +59,7 @@ const WishList = (props) => {
             </Link>
           </div>
           <div className="header-search-container">
-            <SearchBox
-              placeholder="Buscar produto"
-              value={searchValue}
-              onChange={onSearchValueChange}
-            />
+            <SearchBox />
           </div>
         </div>
       </Header>
@@ -83,7 +74,6 @@ const WishList = (props) => {
               product={product}
               showWishListMarker={false}
               showRemoveWishListButton={true}
-              onRemoveFromWishList={() => removeFromWishList(product)}
             />
           ))
         ) : (
@@ -96,6 +86,7 @@ const WishList = (props) => {
 
 const mapStateToProps = (store) => ({
   wishList: store.wishListState.wishList,
+  searchValue: store.searchValueState.searchValue,
 });
 
 export default connect(mapStateToProps)(WishList);

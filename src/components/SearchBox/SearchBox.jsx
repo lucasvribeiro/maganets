@@ -1,5 +1,11 @@
+import { useEffect } from "react";
+
 import styled from "styled-components";
 import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { changeSearchValue } from "../../actions/index";
 
 const StyledSearchBox = styled.div`
   i {
@@ -36,13 +42,28 @@ const StyledSearchBox = styled.div`
   }
 `;
 
-const SearchBox = ({ placeholder, value, disabled, onChange }) => {
+const SearchBox = ({
+  placeholder,
+  disabled,
+  searchValue,
+  changeSearchValue,
+}) => {
+  const handleSearchValueChanged = (e) => {
+    changeSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    changeSearchValue("");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <StyledSearchBox>
       <input
         type="text"
-        value={value}
-        onChange={onChange}
+        value={searchValue}
+        onChange={handleSearchValueChanged}
         disabled={disabled}
         placeholder={placeholder}
       />
@@ -53,15 +74,20 @@ const SearchBox = ({ placeholder, value, disabled, onChange }) => {
 };
 
 SearchBox.propTypes = {
-  placeholder: PropTypes.any,
-  value: PropTypes.string,
+  placeholder: PropTypes.string,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
 };
 
-SearchBox.deafultProps = {
+SearchBox.defaultProps = {
   placeholder: "Busca...",
   disabled: false,
 };
 
-export default SearchBox;
+const mapStateToProps = (store) => ({
+  searchValue: store.searchValueState.searchValue,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ changeSearchValue }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

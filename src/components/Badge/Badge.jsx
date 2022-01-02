@@ -21,6 +21,6 @@ Badge.propTypes = {
   children: PropTypes.any,
 };
 
-Badge.deafultProps = {};
+Badge.defaultProps = {};
 
 export default Badge;

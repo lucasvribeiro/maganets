@@ -29,6 +29,6 @@ Header.propTypes = {
   children: PropTypes.any,
 };
 
-Header.deafultProps = {};
+Header.defaultProps = {};
 
 export default Header;

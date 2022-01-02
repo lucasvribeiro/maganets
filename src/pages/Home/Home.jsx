@@ -15,17 +15,12 @@ import Empty from "../../components/Empty/Empty";
 import "./Home.css";
 
 const Home = (props) => {
-  const { wishList, addToWishList, removeFromWishList } = props;
+  const { wishList, searchValue } = props;
 
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(true);
 
   const [visibleProducts, setVisibleProducts] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-
-  const onSearchValueChange = (e) => {
-    setSearchValue(e.target.value);
-  };
 
   const filterProducts = () => {
     setVisibleProducts(
@@ -86,11 +81,7 @@ const Home = (props) => {
               </Link>
             </div>
             <div className="header-search-container">
-              <SearchBox
-                placeholder="Buscar produto"
-                value={searchValue}
-                onChange={onSearchValueChange}
-              />
+              <SearchBox />
             </div>
           </div>
         </Header>
@@ -105,8 +96,6 @@ const Home = (props) => {
                 product={product}
                 showWishListMarker={true}
                 showRemoveWishListButton={false}
-                onAddToWishList={() => addToWishList(product)}
-                onRemoveFromWishList={() => removeFromWishList(product)}
               />
             ))
           ) : (
@@ -120,6 +109,7 @@ const Home = (props) => {
 
 const mapStateToProps = (store) => ({
   wishList: store.wishListState.wishList,
+  searchValue: store.searchValueState.searchValue,
 });
 
 export default connect(mapStateToProps)(Home);

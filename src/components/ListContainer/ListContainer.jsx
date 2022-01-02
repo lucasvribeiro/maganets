@@ -32,6 +32,6 @@ ListContainer.propTypes = {
   children: PropTypes.any,
 };
 
-ListContainer.deafultProps = {};
+ListContainer.defaultProps = {};
 
 export default ListContainer;

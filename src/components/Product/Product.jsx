@@ -142,7 +142,7 @@ Product.propTypes = {
   showRemoveWishListButton: PropTypes.bool,
 };
 
-Product.deafultProps = {
+Product.defaultProps = {
   showWishListMarker: true,
   showRemoveWishListButton: false,
 };
