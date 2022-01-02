@@ -43,7 +43,7 @@ const WishList = (props) => {
   }, [wishList]);
 
   return (
-    <div>
+    <>
       <Header>
         <div className="header-left-container">
           <h2>MagaNets</h2>
@@ -94,7 +94,7 @@ const WishList = (props) => {
             />
           ))}
       </ListContainer>
-    </div>
+    </>
   );
 };
 

@@ -14,12 +14,14 @@ import ListContainer from "../../components/ListContainer/ListContainer";
 import { getProducts } from "../../services/api";
 
 import "./Home.css";
+import Loader from "../../components/Loader/Loader";
 
 const Home = (props) => {
   const { wishList, addToWishList, removeFromWishList } = props;
 
   const [products, setProducts] = useState();
- 
+  const [loading, setLoading] = useState(true);
+
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
@@ -52,10 +54,11 @@ const Home = (props) => {
   useEffect(() => {
     getProducts()
       .then((res) => {
-        console.log(res.data);
+        setLoading(false);
         setProducts(res.data.products);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   }, []);
@@ -65,59 +68,61 @@ const Home = (props) => {
   }, [wishList]);
 
   return (
-    <div>
-      <Header>
-        <div className="header-left-container">
-          <h2>MagaNets</h2>
-        </div>
-        <div className="header-right-container">
-          <div className="header-links-container">
-            <Link to="/">
-              <span className="header-link">
-                <i className="fas fa-map-marker-alt" /> Cidade: São Paulo
-              </span>
-            </Link>
-
-            <Link to="/support">
-              <span className="header-link">
-                <i className="fas fa-phone" /> Central de Atendimento
-              </span>
-            </Link>
-
-            <Link to="/wish-list">
-              <span className="header-link">
-                <i className="fas fa-heart" /> Lista de Desejos
-                <Badge>{wishList.length}</Badge>
-              </span>
-            </Link>
+    <>
+      <Loader loading={loading}>
+        <Header>
+          <div className="header-left-container">
+            <h2>MagaNets</h2>
           </div>
-          <div className="header-search-container">
-            <SearchBox
-              placeholder="Buscar produto"
-              value={searchValue}
-              onChange={onSearchValueChange}
-            />
+          <div className="header-right-container">
+            <div className="header-links-container">
+              <Link to="/">
+                <span className="header-link">
+                  <i className="fas fa-map-marker-alt" /> Cidade: São Paulo
+                </span>
+              </Link>
+
+              <Link to="/support">
+                <span className="header-link">
+                  <i className="fas fa-phone" /> Central de Atendimento
+                </span>
+              </Link>
+
+              <Link to="/wish-list">
+                <span className="header-link">
+                  <i className="fas fa-heart" /> Lista de Desejos
+                  <Badge>{wishList.length}</Badge>
+                </span>
+              </Link>
+            </div>
+            <div className="header-search-container">
+              <SearchBox
+                placeholder="Buscar produto"
+                value={searchValue}
+                onChange={onSearchValueChange}
+              />
+            </div>
           </div>
-        </div>
-      </Header>
+        </Header>
 
-      <div className="path-container">Home</div>
+        <div className="path-container">Home</div>
 
-      <ListContainer>
-        {visibleProducts &&
-          visibleProducts.map((product) => (
-            <Product
-              key={product.sku}
-              product={product}
-              showWishListMarker={true}
-              showRemoveWishListButton={false}
-              isOnWishList={checkIsOnWishList(product)}
-              onAddToWishList={() => addToWishList(product)}
-              onRemoveFromWishList={() => removeFromWishList(product)}
-            />
-          ))}
-      </ListContainer>
-    </div>
+        <ListContainer>
+          {visibleProducts &&
+            visibleProducts.map((product) => (
+              <Product
+                key={product.sku}
+                product={product}
+                showWishListMarker={true}
+                showRemoveWishListButton={false}
+                isOnWishList={checkIsOnWishList(product)}
+                onAddToWishList={() => addToWishList(product)}
+                onRemoveFromWishList={() => removeFromWishList(product)}
+              />
+            ))}
+        </ListContainer>
+      </Loader>
+    </>
   );
 };
 

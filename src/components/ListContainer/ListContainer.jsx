@@ -5,11 +5,10 @@ const ListContainerStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(4, auto);
   grid-gap: 32px 60px;
-  width: 100%;
+  width: fit-content;
   max-width: 1400px;
   padding: 0 50px;
   box-sizing: border-box;
-  justify-content: center;
 
   @media only screen and (max-width: 1200px) {
     grid-template-columns: repeat(3, auto);
