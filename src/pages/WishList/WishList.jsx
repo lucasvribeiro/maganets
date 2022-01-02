@@ -9,6 +9,7 @@ import Header from "../../components/Header/Header";
 import ListContainer from "../../components/ListContainer/ListContainer";
 import Product from "../../components/Product/Product";
 import Empty from "../../components/Empty/Empty";
+import Path from "../../components/Path/Path";
 
 const WishList = (props) => {
   const { wishList, filteredProducts, refreshProducts, searchValue } = props;
@@ -22,12 +23,12 @@ const WishList = (props) => {
   return (
     <>
       <Header />
-
-      <div className="path-container">
-        <Link to="/">Home</Link>
-        {">"}
-        <Link to="/wish-list">Lista de Desejos</Link>
-      </div>
+      <Path
+        links={[
+          <Link to="/">Home</Link>,
+          <Link to="/wish-list">Lista de Desejos</Link>,
+        ]}
+      />
 
       <ListContainer>
         {filteredProducts && filteredProducts.length ? (

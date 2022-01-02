@@ -12,8 +12,7 @@ import Product from "../../components/Product/Product";
 import ListContainer from "../../components/ListContainer/ListContainer";
 import Loader from "../../components/Loader/Loader";
 import Empty from "../../components/Empty/Empty";
-
-import "./Home.css";
+import Path from "../../components/Path/Path";
 
 const Home = (props) => {
   const { filteredProducts, initializeProducts } = props;
@@ -38,11 +37,7 @@ const Home = (props) => {
     <>
       <Loader loading={loading}>
         <Header />
-
-        <div className="path-container">
-          <Link to="/">Home</Link>
-        </div>
-
+        <Path links={[<Link to="/">Home</Link>]} />
         <ListContainer>
           {filteredProducts && filteredProducts.length ? (
             filteredProducts.map((product) => (
