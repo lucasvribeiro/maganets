@@ -41,7 +41,7 @@ const Home = (props) => {
       <Loader loading={loading}>
         <Header>
           <div className="header-left-container">
-            <h2>MagaNets</h2>
+            <h1 className="logo">MagaNets</h1>
           </div>
           <div className="header-right-container">
             <div className="header-links-container">
@@ -70,7 +70,9 @@ const Home = (props) => {
           </div>
         </Header>
 
-        <div className="path-container">Home</div>
+        <div className="path-container">
+          <Link to="/">Home</Link>
+        </div>
 
         <ListContainer>
           {filteredProducts && filteredProducts.length ? (

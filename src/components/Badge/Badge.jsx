@@ -8,7 +8,7 @@ const StyledBadge = styled.span`
 
   font-size: 0.8rem;
   font-weight: bold;
-  background-color: #370f53;
+  background-color: #13abe1;
 
   margin: 0 4px;
 `;

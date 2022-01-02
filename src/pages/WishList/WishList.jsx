@@ -25,7 +25,7 @@ const WishList = (props) => {
     <>
       <Header>
         <div className="header-left-container">
-          <h2>MagaNets</h2>
+          <h1 className="logo">MagaNets</h1>
         </div>
         <div className="header-right-container">
           <div className="header-links-container">
@@ -54,7 +54,11 @@ const WishList = (props) => {
         </div>
       </Header>
 
-      <div className="path-container">Home</div>
+      <div className="path-container">
+        <Link to="/">Home</Link>
+        {">"}
+        <Link to="/wish-list">Lista de Desejos</Link>
+      </div>
 
       <ListContainer>
         {filteredProducts && filteredProducts.length ? (

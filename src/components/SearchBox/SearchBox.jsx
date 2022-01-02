@@ -81,7 +81,7 @@ SearchBox.propTypes = {
 };
 
 SearchBox.defaultProps = {
-  placeholder: "Busca...",
+  placeholder: "Buscar produto...",
   disabled: false,
 };
 
