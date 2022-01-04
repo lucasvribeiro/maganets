@@ -32,6 +32,7 @@ const StyledHeader = styled.div`
     font-family: "Secular One", sans-serif;
     font-size: 2.5rem;
     line-height: 2.5rem;
+    text-align: left;
   }
 
   .links-container {
@@ -89,6 +90,10 @@ const StyledHeader = styled.div`
     .link {
       padding: 0;
     }
+
+    .logo {
+      text-align: center;
+    }
   }
 
   @media only screen and (max-width: 480px) {
@@ -104,11 +109,13 @@ const Header = ({ wishList }) => {
   return (
     <StyledHeader>
       <div className="left-container">
-        <h1 className="logo">maganets</h1>
+        <Link to="/">
+          <h1 className="logo">maganets</h1>
+        </Link>
       </div>
       <div className="right-container">
         <div className="links-container">
-          <Link to="/">
+          <Link to="/location">
             <span className="link">
               <i className="fas fa-map-marker-alt" />
               <span className="link-prefix">Cidade:</span> São Paulo
