@@ -115,12 +115,13 @@ const Header = ({ logo, links, searchBox }) => {
 };
 
 Header.propTypes = {
-  wishList: PropTypes.array.isRequired,
   logo: PropTypes.any,
   links: PropTypes.any,
   searchBox: PropTypes.any,
 };
 
-Header.defaultProps = {};
+Header.defaultProps = {
+  logo: "maganets",
+};
 
 export default Header;

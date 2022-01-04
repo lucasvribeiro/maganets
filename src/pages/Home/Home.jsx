@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { initializeProducts } from "../../actions/index";
 
-import { getProducts } from "../../services/api";
+import { getProducts } from "../../services/api/api";
 
 import Header from "../../components/Header/Header";
 import Product from "../../components/Product/Product";
