@@ -120,6 +120,7 @@ export const Product = ({
 
       {showRemoveWishListButton && (
         <div
+          data-testid="removewlbtn"
           className="remove-button"
           onClick={() => removeFromWishList(product)}
         >
