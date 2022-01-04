@@ -1,10 +1,5 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-
-import Badge from "../Badge/Badge";
-import SearchBox from "../SearchBox/SearchBox";
 
 const StyledHeader = styled.div`
   height: fit-content;
@@ -105,41 +100,15 @@ const StyledHeader = styled.div`
   }
 `;
 
-const Header = ({ wishList }) => {
+const Header = ({ logo, links, searchBox }) => {
   return (
-    <StyledHeader>
-      <div className="left-container">
-        <Link to="/">
-          <h1 className="logo">maganets</h1>
-        </Link>
-      </div>
+    <StyledHeader data-testid="header">
+      <div className="left-container">{logo}</div>
       <div className="right-container">
         <div className="links-container">
-          <Link to="/location">
-            <span className="link">
-              <i className="fas fa-map-marker-alt" />
-              <span className="link-prefix">Cidade:</span> São Paulo
-            </span>
-          </Link>
-
-          <Link to="/support">
-            <span className="link">
-              <i className="fas fa-phone" />
-              <span className="link-prefix">Central de </span>Atendimento
-            </span>
-          </Link>
-
-          <Link to="/wish-list">
-            <span className="link">
-              <i className="fas fa-heart" />
-              <span className="link-prefix">Lista de </span>Desejos
-              <Badge>{wishList.length}</Badge>
-            </span>
-          </Link>
+          {links && links.map((link, index) => <span key={index}>{link}</span>)}
         </div>
-        <div className="search-container">
-          <SearchBox />
-        </div>
+        <div className="search-container">{searchBox}</div>
       </div>
     </StyledHeader>
   );
@@ -147,12 +116,11 @@ const Header = ({ wishList }) => {
 
 Header.propTypes = {
   wishList: PropTypes.array.isRequired,
+  logo: PropTypes.any,
+  links: PropTypes.any,
+  searchBox: PropTypes.any,
 };
 
 Header.defaultProps = {};
 
-const mapStateToProps = (store) => ({
-  wishList: store.wishListState.wishList,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
