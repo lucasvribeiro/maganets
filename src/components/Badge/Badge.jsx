@@ -14,7 +14,7 @@ const StyledBadge = styled.span`
 `;
 
 const Badge = ({ children }) => {
-  return <StyledBadge>{children}</StyledBadge>;
+  return <StyledBadge data-testid="badge">{children}</StyledBadge>;
 };
 
 Badge.propTypes = {

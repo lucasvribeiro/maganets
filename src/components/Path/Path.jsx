@@ -18,18 +18,19 @@ const StyledPath = styled.div`
 
 const Path = ({ links }) => {
   return (
-    <StyledPath>
-      {links.map((link, index) => (
-        <>
-          {link} {index !== links.length - 1 && ">"}
-        </>
-      ))}
+    <StyledPath data-testid="path">
+      {links &&
+        links.map((link, index) => (
+          <span key={index}>
+            {link} {index !== links.length - 1 && ">"}
+          </span>
+        ))}
     </StyledPath>
   );
 };
 
 Path.propTypes = {
-  links: PropTypes.array.isRequired,
+  links: PropTypes.array,
 };
 
 Path.defaultProps = {};

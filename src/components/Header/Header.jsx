@@ -85,7 +85,6 @@ const StyledHeader = styled.div`
 const Header = ({ wishList }) => {
   return (
     <StyledHeader>
-      {" "}
       <div className="left-container">
         <h1 className="logo">MagaNets</h1>
       </div>

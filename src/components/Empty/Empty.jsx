@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledEmpty = styled.div`
   height: 180px;
@@ -26,17 +27,21 @@ const StyledEmpty = styled.div`
   }
 `;
 
-const Empty = () => {
+const Empty = ({ message }) => {
   return (
-    <StyledEmpty>
+    <StyledEmpty data-testid="empty">
       <i className="far fa-folder-open" />
-      <p>Nenhum item</p>
+      <p>{message}</p>
     </StyledEmpty>
   );
 };
 
-Empty.propTypes = {};
+Empty.propTypes = {
+  message: PropTypes.string,
+};
 
-Empty.defaultProps = {};
+Empty.defaultProps = {
+  message: "Nenhum item",
+};
 
 export default Empty;

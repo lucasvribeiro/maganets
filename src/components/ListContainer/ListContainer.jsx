@@ -25,7 +25,11 @@ const ListContainerStyled = styled.div`
 `;
 
 const ListContainer = ({ children }) => {
-  return <ListContainerStyled>{children}</ListContainerStyled>;
+  return (
+    <ListContainerStyled data-testid="list-container">
+      {children}
+    </ListContainerStyled>
+  );
 };
 
 ListContainer.propTypes = {

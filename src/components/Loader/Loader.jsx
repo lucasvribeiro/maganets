@@ -15,7 +15,7 @@ const StyledLoader = styled(Spin)`
 
 const Loader = ({ children, size, loading }) => {
   return (
-    <StyledLoader size={size} spinning={loading}>
+    <StyledLoader data-testid="loader" size={size} spinning={loading}>
       {children}
     </StyledLoader>
   );
