@@ -7,16 +7,19 @@ const ListContainerStyled = styled.div`
   grid-gap: 32px 60px;
   width: fit-content;
   max-width: 1400px;
-  padding: 0 50px;
+  padding: 0 50px 50px 50px;
   box-sizing: border-box;
 
   @media only screen and (max-width: 1200px) {
     grid-template-columns: repeat(3, auto);
     grid-gap: 32px 16px;
+    padding: 0 30px 30px 30px;
   }
 
   @media only screen and (max-width: 768px) {
     grid-template-columns: repeat(2, auto);
+    width: 100%;
+    justify-content: center;
   }
 
   @media only screen and (max-width: 480px) {
