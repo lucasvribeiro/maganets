@@ -35,10 +35,24 @@ const StyledProduct = styled.div`
   .product-title {
     font-weight: bold;
     height: 42px;
+    margin: 16px 0 0 0;
+  }
+
+  .product-free-shipping {
+    color: #04d483;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    & i {
+      margin-right: 2px;
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }
   }
 
   .product-price {
     font-weight: bold;
+    font-size: 1.2rem;
     color: #ffca00;
   }
 
@@ -102,7 +116,11 @@ export const Product = ({
   };
 
   return (
-    <StyledProduct data-testid="product" isOnWishList={isOnWishList(product)}>
+    <StyledProduct
+      data-testid="product"
+      isOnWishList={isOnWishList(product)}
+      title={product.style}
+    >
       {showWishListMarker && (
         <div
           data-testid="wlmarker"
@@ -131,9 +149,17 @@ export const Product = ({
       <img className="product-image" src={product.image} alt={product.title} />
 
       <p className="product-title">{product.title}</p>
+
       <p className="product-price">
         {product.currencyFormat} {product.price}
       </p>
+
+      {product.isFreeShipping && (
+        <span className="product-free-shipping">
+          <i className="fas fa-truck" />
+          FRETE GRÁTIS
+        </span>
+      )}
     </StyledProduct>
   );
 };
