@@ -88,7 +88,7 @@ const StyledProduct = styled.div`
   }
 `;
 
-const Product = ({
+export const Product = ({
   product,
   showWishListMarker,
   showRemoveWishListButton,
@@ -102,9 +102,10 @@ const Product = ({
   };
 
   return (
-    <StyledProduct isOnWishList={isOnWishList(product)}>
+    <StyledProduct data-testid="product" isOnWishList={isOnWishList(product)}>
       {showWishListMarker && (
         <div
+          data-testid="wlmarker"
           className="wish-list-marker"
           onClick={
             isOnWishList(product)

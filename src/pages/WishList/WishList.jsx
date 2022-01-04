@@ -10,6 +10,8 @@ import ListContainer from "../../components/ListContainer/ListContainer";
 import Product from "../../components/Product/Product";
 import Empty from "../../components/Empty/Empty";
 import Path from "../../components/Path/Path";
+import Badge from "../../components/Badge/Badge";
+import SearchBox from "../../components/SearchBox/SearchBox";
 
 const WishList = (props) => {
   const { wishList, filteredProducts, refreshProducts, searchValue } = props;
@@ -22,7 +24,38 @@ const WishList = (props) => {
 
   return (
     <>
-      <Header />
+      <Header
+        searchBox={<SearchBox />}
+        logo={
+          <Link to="/">
+            <h1 className="logo">maganets</h1>
+          </Link>
+        }
+        links={[
+          <Link to="/location">
+            <span className="link">
+              <i className="fas fa-map-marker-alt" />
+              <span className="link-prefix">Cidade:</span> São Paulo
+            </span>
+          </Link>,
+
+          <Link to="/support">
+            <span className="link">
+              <i className="fas fa-phone" />
+              <span className="link-prefix">Central de </span>Atendimento
+            </span>
+          </Link>,
+
+          <Link to="/wish-list">
+            <span className="link">
+              <i className="fas fa-heart" />
+              <span className="link-prefix">Lista de </span>Desejos
+              <Badge>{wishList.length}</Badge>
+            </span>
+          </Link>,
+        ]}
+      />
+
       <Path
         links={[
           <Link to="/">Home</Link>,

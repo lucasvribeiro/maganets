@@ -42,7 +42,7 @@ const StyledSearchBox = styled.div`
   }
 `;
 
-const SearchBox = ({
+export const SearchBox = ({
   placeholder,
   disabled,
   searchValue,
@@ -63,6 +63,7 @@ const SearchBox = ({
   return (
     <StyledSearchBox>
       <input
+        data-testid="searchbox"
         type="text"
         value={searchValue}
         onChange={handleSearchValueChanged}
@@ -77,11 +78,15 @@ const SearchBox = ({
 
 SearchBox.propTypes = {
   placeholder: PropTypes.string,
+  searchValue: PropTypes.string,
+  changeSearchValue: PropTypes.func.isRequired,
+  filterProducts: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
 };
 
 SearchBox.defaultProps = {
   placeholder: "Buscar produto...",
+  searchValue: "",
   disabled: false,
 };
 
