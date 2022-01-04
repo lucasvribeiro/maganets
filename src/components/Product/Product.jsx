@@ -10,12 +10,10 @@ const StyledProduct = styled.div`
   width: 200px;
   height: 280px;
   position: relative;
-
   text-align: center;
 
   border: 1px solid #dddddd;
   border-radius: 4px;
-
   box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.08);
 
   display: flex;
@@ -147,7 +145,6 @@ export const Product = ({
       )}
 
       <img className="product-image" src={product.image} alt={product.title} />
-
       <p className="product-title">{product.title}</p>
 
       <p className="product-price">
@@ -168,6 +165,10 @@ Product.propTypes = {
   product: PropTypes.object.isRequired,
   showWishListMarker: PropTypes.bool,
   showRemoveWishListButton: PropTypes.bool,
+
+  wishList: PropTypes.array,
+  addToWishList: PropTypes.func,
+  removeFromWishList: PropTypes.func,
 };
 
 Product.defaultProps = {

@@ -5,10 +5,10 @@ const StyledBadge = styled.span`
   padding: 1px 5px;
   width: fit-content;
   border-radius: 16px;
+  background-color: #13abe1;
 
   font-size: 0.8rem;
   font-weight: bold;
-  background-color: #13abe1;
 
   margin: 0 4px;
 `;

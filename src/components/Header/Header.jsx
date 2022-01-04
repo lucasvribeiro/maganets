@@ -104,10 +104,12 @@ const Header = ({ logo, links, searchBox }) => {
   return (
     <StyledHeader data-testid="header">
       <div className="left-container">{logo}</div>
+
       <div className="right-container">
         <div className="links-container">
           {links && links.map((link, index) => <span key={index}>{link}</span>)}
         </div>
+
         <div className="search-container">{searchBox}</div>
       </div>
     </StyledHeader>

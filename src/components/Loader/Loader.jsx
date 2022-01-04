@@ -22,12 +22,12 @@ const Loader = ({ children, size, loading }) => {
 };
 
 Loader.propTypes = {
-  size: PropTypes.string,
+  size: PropTypes.oneOf(["small", "middle", "large"]),
   loading: PropTypes.bool,
 };
 
 Loader.defaultProps = {
-  size: "middle", // "small", "middle" or "large"
+  size: "middle",
   loading: false,
 };
 

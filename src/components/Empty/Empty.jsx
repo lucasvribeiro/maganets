@@ -5,16 +5,15 @@ const StyledEmpty = styled.div`
   height: 180px;
   width: 240px;
   color: #cccccc;
+  font-size: 20px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  font-size: 20px;
-
   border: 1px solid #dddddd;
   border-radius: 4px;
-
   box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.08);
 
   i {
@@ -22,7 +21,7 @@ const StyledEmpty = styled.div`
   }
 
   p {
-    font-weight: 300;
+    font-weight: 400;
     margin: 8px 0 0 0;
   }
 `;

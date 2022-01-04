@@ -18,8 +18,31 @@ import Badge from "../../components/Badge/Badge";
 
 const Home = (props) => {
   const { filteredProducts, initializeProducts, wishList } = props;
-
   const [loading, setLoading] = useState(true);
+
+  const headerLinks = [
+    <Link to="/location">
+      <span className="link">
+        <i className="fas fa-map-marker-alt" />
+        <span className="link-prefix">Cidade:</span> São Paulo
+      </span>
+    </Link>,
+
+    <Link to="/support">
+      <span className="link">
+        <i className="fas fa-phone" />
+        <span className="link-prefix">Central de </span>Atendimento
+      </span>
+    </Link>,
+
+    <Link to="/wish-list">
+      <span className="link">
+        <i className="fas fa-heart" />
+        <span className="link-prefix">Lista de </span>Desejos
+        <Badge>{wishList.length}</Badge>
+      </span>
+    </Link>,
+  ];
 
   useEffect(() => {
     getProducts()
@@ -40,37 +63,16 @@ const Home = (props) => {
       <Loader loading={loading}>
         <Header
           searchBox={<SearchBox />}
+          links={headerLinks}
           logo={
             <Link to="/">
               <h1 className="logo">maganets</h1>
             </Link>
           }
-          links={[
-            <Link to="/location">
-              <span className="link">
-                <i className="fas fa-map-marker-alt" />
-                <span className="link-prefix">Cidade:</span> São Paulo
-              </span>
-            </Link>,
-
-            <Link to="/support">
-              <span className="link">
-                <i className="fas fa-phone" />
-                <span className="link-prefix">Central de </span>Atendimento
-              </span>
-            </Link>,
-
-            <Link to="/wish-list">
-              <span className="link">
-                <i className="fas fa-heart" />
-                <span className="link-prefix">Lista de </span>Desejos
-                <Badge>{wishList.length}</Badge>
-              </span>
-            </Link>,
-          ]}
         />
 
         <Path links={[<Link to="/">Home</Link>]} />
+
         <ListContainer>
           {filteredProducts && filteredProducts.length ? (
             filteredProducts.map((product) => (
